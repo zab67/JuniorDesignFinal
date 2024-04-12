@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="inj">
+    <file>Adrenaline.webp</file>
+    <file>AHF1.webp</file>
+    <file>ETG.webp</file>
+    <file>L1.webp</file>
+    <file>M.U.L.E..webp</file>
+    <file>Morphine.webp</file>
+    <file>Obdolbos.webp</file>
+    <file>Obdolbos2.webp</file>
+    <file>P22.webp</file>
+    <file>Perfotoran.webp</file>
+    <file>PNB.webp</file>
+    <file>Propital.webp</file>
+    <file>Trimadol.webp</file>
+    <file>Zagustin.webp</file>
+  </qresource>
+</RCC>

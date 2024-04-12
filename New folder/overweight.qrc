@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="overweight">
+    <file>Overweight.webp</file>
+  </qresource>
+</RCC>

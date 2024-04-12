@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="painkill">
+    <file>Painkill.webp</file>
+  </qresource>
+</RCC>

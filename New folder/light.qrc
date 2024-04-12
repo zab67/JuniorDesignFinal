@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="light">
+    <file>Light.webp</file>
+  </qresource>
+</RCC>

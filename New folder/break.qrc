@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="break">
+    <file>Fracture.webp</file>
+  </qresource>
+</RCC>
