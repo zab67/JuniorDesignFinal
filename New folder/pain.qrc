@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="pain">
+    <file>Pain.webp</file>
+  </qresource>
+</RCC>

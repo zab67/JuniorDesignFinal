@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="water">
+    <file>energy.png</file>
+    <file>water.png</file>
+  </qresource>
+</RCC>
