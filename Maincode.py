@@ -1,6 +1,9 @@
 from PyQt6.QtGui import QPixmap
 from PyQt6 import QtCore, QtGui, QtWidgets
 from MainWindow import Ui_MainWindow  # Assuming MainWindow is your custom QMainWindow subclass
+#Character class
+import Character
+from Character import *
 
 class MainWindow(QtWidgets.QMainWindow):  # Subclass QMainWindow
     def __init__(self):
