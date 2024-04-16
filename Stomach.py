@@ -1,8 +1,8 @@
 class Stomach():
     def __init__(self):
-        health = 60
-        light:bool = False
-        heavy:bool = False
+        self.health = 70
+        self.light:bool = False
+        self.heavy:bool = False
 
     def setHealth(self, val):
         self.health = val
@@ -12,3 +12,6 @@ class Stomach():
 
     def setHeavy(self, val):
         self.heavy = val
+    
+    def getHealth(self):
+        return self.health

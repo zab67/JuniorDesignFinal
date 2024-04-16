@@ -1,9 +1,8 @@
-class Arm():
+class Head():
     def __init__(self):
-        self.health = 60
+        self.health = 35
         self.light:bool = False
         self.heavy:bool = False
-        self.fracture:bool = False
 
     def setHealth(self, val):
         self.health = val
@@ -13,9 +12,6 @@ class Arm():
 
     def setHeavy(self, val):
         self.heavy = val
-
-    def setFracture(self, val):
-        self.fracture = val
 
     def getHealth(self):
         return self.health

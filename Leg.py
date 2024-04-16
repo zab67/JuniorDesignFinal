@@ -1,9 +1,9 @@
 class Leg():
     def __init__(self):
-        health = 65
-        light:bool = False
-        heavy:bool = False
-        fracture:bool = False
+        self.health = 65
+        self.light:bool = False
+        self.heavy:bool = False
+        self.fracture:bool = False
 
     def setHealth(self, val):
         self.health = val
@@ -16,3 +16,6 @@ class Leg():
 
     def setFracture(self, val):
         self.fracture = val
+
+    def getHealth(self):
+        return self.health
