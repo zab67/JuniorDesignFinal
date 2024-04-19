@@ -19,3 +19,16 @@ class Arm():
 
     def getHealth(self):
         return self.health
+    
+    def setStatus(self, l, h, f):
+        self.light = l
+        self.heavy = h
+        self.fracture = f
+
+    def getStatus(self):
+        return (self.light, self.heavy, self.fracture)
+    
+    def subHealth(self, val):
+        self.health = self.health - val
+        if(self.health < 0):
+            self.health = 0

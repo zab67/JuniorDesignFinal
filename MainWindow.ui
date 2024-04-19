@@ -389,8 +389,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-</string>
+     <string notr="true"/>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -1309,6 +1308,214 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/inj/M.U.L.E..webp&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
+     <widget class="QRadioButton" name="MorphineB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>30</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="L1B">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>100</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="TrimadolB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>170</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="AdrenalineB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>240</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="AHF1B">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>520</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="PerfotoraB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>450</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="PropitalB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>310</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="ETGB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>380</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="MULEB">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>240</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="Obdolbos2B">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>170</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="PNBB">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>30</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="ObdolbosB">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>100</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="ZagustinB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>590</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QLabel" name="RAL">
@@ -1561,7 +1768,7 @@
    <widget class="QLabel" name="HPK">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>890</x>
       <y>130</y>
       <width>21</width>
       <height>31</height>
@@ -1574,7 +1781,7 @@
    <widget class="QLabel" name="HO">
     <property name="geometry">
      <rect>
-      <x>950</x>
+      <x>920</x>
       <y>130</y>
       <width>31</width>
       <height>31</height>

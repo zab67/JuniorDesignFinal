@@ -14,46 +14,60 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         
     def connectFunctions(self):
         #Light bleed enables
-        self.LLLB.stateChanged.connect(self.LeftLegLight)
-        self.RLLB.stateChanged.connect(self.RightLegLight)
-        self.LALB.stateChanged.connect(self.LeftArmLight)
-        self.RALB.stateChanged.connect(self.RightArmLight)
-        self.SLB.stateChanged.connect(self.StomachLight)
-        self.TLB.stateChanged.connect(self.ThoraxLight)
-        self.HLB.stateChanged.connect(self.HeadLight)
+        self.LLLB.stateChanged.connect(self.Statuses)
+        self.RLLB.stateChanged.connect(self.Statuses)
+        self.LALB.stateChanged.connect(self.Statuses)
+        self.RALB.stateChanged.connect(self.Statuses)
+        self.SLB.stateChanged.connect(self.Statuses)
+        self.TLB.stateChanged.connect(self.Statuses)
+        self.HLB.stateChanged.connect(self.Statuses)
 
         #Heavy bleed enables
-        self.LLHB.stateChanged.connect(self.LeftLegHeavy)
-        self.RLHB.stateChanged.connect(self.RightLegHeavy)
-        self.LAHB.stateChanged.connect(self.LeftArmHeavy)
-        self.RAHB.stateChanged.connect(self.RightArmHeavy)
-        self.SHB.stateChanged.connect(self.StomachHeavy)
-        self.THB.stateChanged.connect(self.ThoraxHeavy)
-        self.HHB.stateChanged.connect(self.HeadHeavy)
+        self.LLHB.stateChanged.connect(self.Statuses)
+        self.RLHB.stateChanged.connect(self.Statuses)
+        self.LAHB.stateChanged.connect(self.Statuses)
+        self.RAHB.stateChanged.connect(self.Statuses)
+        self.SHB.stateChanged.connect(self.Statuses)
+        self.THB.stateChanged.connect(self.Statuses)
+        self.HHB.stateChanged.connect(self.Statuses)
 
         #Fracture enables
-        self.LLFB.stateChanged.connect(self.LeftLegFracture)
-        self.RLFB.stateChanged.connect(self.RightLegFracture)
-        self.LAFB.stateChanged.connect(self.LeftArmFracture)
-        self.RAFB.stateChanged.connect(self.RightArmFracture)
+        self.LLFB.stateChanged.connect(self.Statuses)
+        self.RLFB.stateChanged.connect(self.Statuses)
+        self.LAFB.stateChanged.connect(self.Statuses)
+        self.RAFB.stateChanged.connect(self.Statuses)
 
         #Health bar changes
-        self.LLHealth.returnPressed.connect(self.ChangeLeftLegHealth)
-        self.RLHealth.returnPressed.connect(self.ChangeRightLegHealth)
-        self.LAHealth.returnPressed.connect(self.ChangeLeftArmHealth)
-        self.RAHealth.returnPressed.connect(self.ChangeRightArmHealth)
-        self.SHealth.returnPressed.connect(self.ChangeStomachHealth)
-        self.THealth.returnPressed.connect(self.ChangeThoraxHealth)
-        self.HHealth.returnPressed.connect(self.ChangeHeadHealth)
+        self.LLHealth.returnPressed.connect(self.ChangeHealth)
+        self.RLHealth.returnPressed.connect(self.ChangeHealth)
+        self.LAHealth.returnPressed.connect(self.ChangeHealth)
+        self.RAHealth.returnPressed.connect(self.ChangeHealth)
+        self.SHealth.returnPressed.connect(self.ChangeHealth)
+        self.THealth.returnPressed.connect(self.ChangeHealth)
+        self.HHealth.returnPressed.connect(self.ChangeHealth)
+
+        #Extra stats
+        self.Weight.returnPressed.connect(self.ChangeAdditional)
+        self.Energy.returnPressed.connect(self.ChangeAdditional)
+        self.Hydration.returnPressed.connect(self.ChangeAdditional)
+
+        #Real time
+        self.SetTimer = QTimer()
+        self.timeStep = 500
+        self.SetTimer.start(self.timeStep)
+        self.SetTimer.timeout.connect(self.run)
 
         self.MainTimer = QTimer()
-        self.timeStep = 500
+        self.timeStep = 1000
         self.MainTimer.start(self.timeStep)
-        self.MainTimer.timeout.connect(self.run)
+        self.MainTimer.timeout.connect(self.step)
 
-
-    #Function to run constantly
+    #Function to activate statuses
+    def step(self):
+        self.PMC.timeStep()
+    #Function to get values constantly
     def run(self):
+        #Gets the PMC health and displays them
         val = self.PMC.getLeftLeg()
         self.LeftLegHealth.setValue(val)
         self.LeftLegHealthValue.setText(str(val) + "/65")
@@ -78,178 +92,209 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         val = self.PMC.getTotalHealth()
         self.OverallHealth.setValue(val)
         self.OverallHealthValue.setText(str(val) + "/440")
-
-
-        
-
-    #Functions for light bleeds
-    def LeftLegLight(self):
-        if self.LLLB.isChecked():
+        #Gets the PMC statuses and displays them
+        val = self.PMC.getWeight()
+        if(val < 30):
+            self.HO.hide()
+            self.WeightValue.setText('<html><head/><body><p><span style=" font-size:12pt; font-weight:700; color:#d7ffcb;">' + str(val) + '/ 60</span></p><p><br/></p><p><br/></p></body></html>')
+        elif(val < 60):
+            self.WeightValue.setText('<html><head/><body><p><span style=" font-size:12pt; font-weight:700; color:#ffe357;">' + str(val) + '/ 60</span></p><p><br/></p><p><br/></p></body></html>')
+            self.HO.show()
+        else:
+            self.WeightValue.setText('<html><head/><body><p><span style=" font-size:12pt; font-weight:700; color:#ff2600;">' + str(val) + '/ 60</span></p><p><br/></p><p><br/></p></body></html>')            
+            self.HO.show()
+        val = self.PMC.getEnergy()
+        self.EnergyValue.setText('<html><head/><body><p><span style=" font-size:14pt; font-weight:700; color:#fffb7d;">' + str(val) + '/100</span></p><p><br/></p></body></html>')
+        val = self.PMC.getHydration()
+        self.HydrationValue.setText('<html><head/><body><p><span style=" font-size:14pt; font-weight:700; color:#6ef3ff;">' + str(val) + '/100</span></p><p><br/></p></body></html>')
+        (light, heavy, fracture) = self.PMC.getLeftLegStatus()
+        if(light):
             self.LLL.show()
         else:
             self.LLL.hide()
-
-    def RightLegLight(self):
-        if self.RLLB.isChecked():
-            self.RLL.show()
-        else:
-            self.RLL.hide()
-
-    def LeftArmLight(self):
-        if self.LALB.isChecked():
-            self.LAL.show()
-        else:
-            self.LAL.hide()
-    
-    def RightArmLight(self):
-        if self.RALB.isChecked():
-            self.RAL.show()
-        else:
-            self.RAL.hide()
-    
-    def StomachLight(self):
-        if self.SLB.isChecked():
-            self.SL.show()
-        else:
-            self.SL.hide()
-
-    def ThoraxLight(self):
-        if self.TLB.isChecked():
-            self.TL.show()
-        else:
-            self.TL.hide()
-
-    def HeadLight(self):
-        if self.HLB.isChecked():
-            self.HL.show()
-        else:
-            self.HL.hide()
-
-    #Functions for heavy bleeds
-    def LeftLegHeavy(self):
-        if self.LLHB.isChecked():
+            self.LLLB.setChecked(False)
+        if(heavy):
             self.LLH.show()
         else:
             self.LLH.hide()
-
-    def RightLegHeavy(self):
-        if self.RLHB.isChecked():
-            self.RLH.show()
-        else:
-            self.RLH.hide()
-
-    def LeftArmHeavy(self):
-        if self.LAHB.isChecked():
-            self.LAH.show()
-        else:
-            self.LAH.hide()
-    
-    def RightArmHeavy(self):
-        if self.RAHB.isChecked():
-            self.RAH.show()
-        else:
-            self.RAH.hide()
-    
-    def StomachHeavy(self):
-        if self.SHB.isChecked():
-            self.SH.show()
-        else:
-            self.SH.hide()
-
-    def ThoraxHeavy(self):
-        if self.THB.isChecked():
-            self.TH.show()
-        else:
-            self.TH.hide()
-
-    def HeadHeavy(self):
-        if self.HHB.isChecked():
-            self.HH.show()
-        else:
-            self.HH.hide()
-
-    #Functions for fractures
-    def LeftLegFracture(self):
-        if self.LLFB.isChecked():
+            self.LLHB.setChecked(False)
+        if(fracture):
             self.LLB.show()
         else:
             self.LLB.hide()
-    
-    def RightLegFracture(self):
-        if self.RLFB.isChecked():
+
+        (light, heavy, fracture) = self.PMC.getRightLegStatus()
+        if(light):
+            self.RLL.show()
+        else:
+            self.RLL.hide()
+            self.RLLB.setChecked(False)
+        if(heavy):
+            self.RLH.show()
+        else:
+            self.RLH.hide()
+            self.RLHB.setChecked(False)
+        if(fracture):
             self.RLB.show()
         else:
             self.RLB.hide()
 
-    def LeftArmFracture(self):
-        if self.LAFB.isChecked():
+        (light, heavy, fracture) = self.PMC.getLeftArmStatus()
+        if(light):
+            self.LAL.show()
+        else:
+            self.LAL.hide()
+            self.LALB.setChecked(False)
+        if(heavy):
+            self.LAH.show()
+        else:
+            self.LAH.hide()
+            self.LAHB.setChecked(False)
+        if(fracture):
             self.LAB.show()
         else:
             self.LAB.hide()
 
-    def RightArmFracture(self):
-        if self.RAFB.isChecked():
+        (light, heavy, fracture) = self.PMC.getRightArmStatus()
+        if(light):
+            self.RAL.show()
+        else:
+            self.RAL.hide()
+            self.RALB.setChecked(False)
+        if(heavy):
+            self.RAH.show()
+        else:
+            self.RAH.hide()
+            self.RAHB.setChecked(False)
+        if(fracture):
             self.RAB.show()
         else:
             self.RAB.hide()
-  
+
+        (light, heavy) = self.PMC.getStomachStatus()
+        if(light):
+            self.SL.show()
+        else:
+            self.SL.hide()
+            self.SLB.setChecked(False)
+        if(heavy):
+            self.SH.show()
+        else:
+            self.SH.hide()
+            self.SHB.setChecked(False)
+
+        (light, heavy) = self.PMC.getThoraxStatus()
+        if(light):
+            self.TL.show()
+        else:
+            self.TL.hide()
+            self.TLB.setChecked(False)
+        if(heavy):
+            self.TH.show()
+        else:
+            self.TH.hide()
+            self.THB.setChecked(False)
+
+        (light, heavy) = self.PMC.getHeadStatus()
+        if(light):
+            self.HL.show()
+        else:
+            self.HL.hide()
+            self.HLB.setChecked(False)
+        if(heavy):
+            self.HH.show()
+        else:
+            self.HH.hide()
+            self.HHB.setChecked(False)
+        
+        if(self.PMC.getIfFracture() and not(self.PMC.getIfPainKill())):
+            self.HP.show()
+        else:
+            self.HP.hide()
+
+        if(self.PMC.getIfPainKill()):
+            self.HPK.show()
+        else:
+            self.HPK.hide()
+
+
+        
+
+    #Functions for limb statuses
+    def Statuses(self):
+        self.PMC.setLeftLegStatus(self.LLLB.isChecked(), self.LLHB.isChecked(), self.LLFB.isChecked())
+        self.PMC.setRightLegStatus(self.RLLB.isChecked(), self.RLHB.isChecked(), self.RLFB.isChecked())
+        self.PMC.setLeftArmStatus(self.LALB.isChecked(), self.LAHB.isChecked(), self.LAFB.isChecked())
+        self.PMC.setRightArmStatus(self.RALB.isChecked(), self.RAHB.isChecked(), self.RAFB.isChecked())
+        self.PMC.setStomachStatus(self.SLB.isChecked(), self.SHB.isChecked())
+        self.PMC.setThoraxStatus(self.TLB.isChecked(), self.THB.isChecked())
+        self.PMC.setHeadStatus(self.HLB.isChecked(), self.HHB.isChecked())
+
     #Limb health functions
-    def ChangeLeftLegHealth(self):
+    def ChangeHealth(self):
         try:
             val = int(self.LLHealth.text())
             if(val >= 0 and val < 66):
-                self.PMC.setLeftLeg(val)
-                
+                self.PMC.setLeftLeg(val) 
         except:
-            return
-
-    def ChangeRightLegHealth(self):
+            pass
         try:    
             val = int(self.RLHealth.text())
             if(val >= 0 and val < 66):
                 self.PMC.setRightLeg(val)
         except:
-            return
-
-    def ChangeLeftArmHealth(self):
+            pass
         try:
             val = int(self.LAHealth.text())
             if(val >= 0 and val < 61):
                 self.PMC.setLeftArm(val)
         except:
-            return
-
-    def ChangeRightArmHealth(self):
+            pass
         try:  
             val = int(self.RAHealth.text())
             if(val >= 0 and val < 61):
                 self.PMC.setRightArm(val)
         except:
-            return      
-    
-    def ChangeStomachHealth(self):
+            pass 
         try:  
             val = int(self.SHealth.text())
             if(val >= 0 and val < 71):
-                self.PMC.setHeadHealth(val)
+                self.PMC.setStomachHealth(val)
         except:
-            return
-        
-    def ChangeThoraxHealth(self):
+            pass
         try:  
             val = int(self.THealth.text())
             if(val >= 0 and val < 86):
                 self.PMC.setThoraxHealth(val)
         except:
-            return
-        
-    def ChangeHeadHealth(self):
+            pass
         try:  
             val = int(self.HHealth.text())
             if(val >= 0 and val < 36):
                 self.PMC.setHeadHealth(val)
         except:
             return
+
+    def ChangeAdditional(self):
+        try:
+            val = int(self.Weight.text())
+            if(val >= 0 and val < 101):
+                self.PMC.setWeight(val) 
+        except:
+            pass
+        try:
+            val = int(self.Energy.text())
+            if(val >= 0 and val < 101):
+                self.PMC.setEnergy(val) 
+        except:
+            pass
+        try:
+            val = int(self.Hydration.text())
+            if(val >= 0 and val < 101):
+                self.PMC.setHydration(val) 
+        except:
+            return
+        
 
 if __name__ == "__main__":
     import sys
@@ -323,27 +368,6 @@ if __name__ == "__main__":
     ui.Obdolbos2.setPixmap(pixmap)
     pixmap = QPixmap("New folder/M.U.L.E..webp")
     ui.MULE.setPixmap(pixmap)
-    #default no status effects
-    ui.LLL.hide()
-    ui.LLH.hide()
-    ui.LLB.hide()
-    ui.RLL.hide()
-    ui.RLH.hide()
-    ui.RLB.hide()
-    ui.LAL.hide()
-    ui.LAH.hide()
-    ui.LAB.hide()
-    ui.RAL.hide()
-    ui.RAH.hide()
-    ui.RAB.hide()
-    ui.SL.hide()
-    ui.SH.hide()
-    ui.TL.hide()
-    ui.TH.hide()
-    ui.HL.hide()
-    ui.HH.hide()
-    ui.HP.hide()
-    ui.HPK.hide()
-    ui.HO.hide()
+    
     sys.exit(app.exec())
     
