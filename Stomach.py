@@ -15,3 +15,15 @@ class Stomach():
     
     def getHealth(self):
         return self.health
+    
+    def setStatus(self, l, h):
+        self.light = l
+        self.heavy = h
+        
+    def getStatus(self):
+        return (self.light, self.heavy)
+    
+    def subHealth(self, val):
+        self.health = self.health - val
+        if(self.health < 0):
+            self.health = 0

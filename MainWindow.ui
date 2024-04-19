@@ -389,8 +389,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-</string>
+     <string notr="true"/>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -1561,7 +1560,7 @@
    <widget class="QLabel" name="HPK">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>890</x>
       <y>130</y>
       <width>21</width>
       <height>31</height>
@@ -1574,7 +1573,7 @@
    <widget class="QLabel" name="HO">
     <property name="geometry">
      <rect>
-      <x>950</x>
+      <x>920</x>
       <y>130</y>
       <width>31</width>
       <height>31</height>
