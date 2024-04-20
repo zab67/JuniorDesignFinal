@@ -3,39 +3,113 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtCore import QTimer
 from PyQt6.QtWidgets import QMainWindow
 from MainWindow import Ui_MainWindow  # Assuming MainWindow is your custom QMainWindow subclass
+
 #Character class
 import Character
 from Character import *
+
+#Injector class
+import Injector
+from Injector import *
+
 class Setup(Ui_MainWindow):  # Subclass QMainWindow
     def __init__(self):
         super().__init__()
-
+        #Create simulated body
         self.PMC = Character()
+
+        #initilize all injectors
+        self.morphine = Injector()
+        self.morphine.addPK(305, 0)
+        self.morphine.addEnergyRate(-10,1,0)
+        self.morphine.addHydrationRate(-15,1,0)
+
+        self.l1 = Injector()
+        self.l1.addPK(120, 0)
+        self.l1.addStrength(20,120,1)
+        self.l1.addEnergyRate(-0.45,60,1)
+        self.l1.addHydrationRate(-0.45,60,1)
+
+        self.trimadol = Injector()
+        self.trimadol.addPK(185, 0)
+        self.trimadol.addStrength(10,180,1)
+        self.trimadol.addEnergyRate(-0.5,180,1)
+        self.trimadol.addHydrationRate(-0.5,180,1)
+
+        self.adrenaline = Injector()
+        self.adrenaline.addPK(65, 0)
+        self.adrenaline.addStrength(10,60,1)
+        self.adrenaline.addHealthRate(4,15,1)
+        self.adrenaline.addEnergyRate(-0.8,30,50)
+        self.adrenaline.addHydrationRate(-1,30,50)
+
+        self.propital = Injector()
+        self.propital.addPK(245, 0)
+        self.propital.addHealth(20, 0)
+        self.propital.addHealthRate(1,300,1)
+
+        self.eTG = Injector()
+        self.eTG.addHealthRate(6.5,60,1)
+        self.eTG.addEnergyRate(0.5,60,1)
+        self.eTG.addHealth(-5, 6.5)
+        self.eTG.addEnergyRate(-3,20,65)
+
+        self.perfotora = Injector()
+        self.perfotora.addHealthRate(1.5,60,1)
+        self.perfotora.addNoBleed(60, 1)
+        self.perfotora.addHealth(-15, 60)
+        self.perfotora.addEnergyRate(-1.1,60,60)
+
+        self.aHF1 = Injector()
+        self.aHF1.addHealth(5,0)
+        self.aHF1.addNoBleed(60, 1)
+        self.aHF1.addHydrationRate(-0.3,120,1)
+
+        self.zagustin = Injector()
+        self.zagustin.addNoBleed(200, 0)
+        self.zagustin.addHydrationRate(-1.4,40,170)
+
+        self.pNB = Injector()
+        self.pNB.addStrength(20,40,1)
+        self.pNB.addHealthRate(3,40,1)
+        self.pNB.addHealth(-20, 41)
+
+        self.obdolbos = Injector()
+
+        self.obdolbos2 = Injector()
+        self.obdolbos2.addStrength((27 + 20),1800,1)
+        self.obdolbos2.addEnergyRate(-1,1800,1)
+        self.obdolbos2.addHydrationRate(-1,1800,1)
+
+        self.mULE = Injector()
+        self.mULE.addStrength(30,900,1)
+        self.mULE.addHealthRate(-0.1,900,1)
+        
         
     def connectFunctions(self):
         #Light bleed enables
-        self.LLLB.stateChanged.connect(self.Statuses)
-        self.RLLB.stateChanged.connect(self.Statuses)
-        self.LALB.stateChanged.connect(self.Statuses)
-        self.RALB.stateChanged.connect(self.Statuses)
-        self.SLB.stateChanged.connect(self.Statuses)
-        self.TLB.stateChanged.connect(self.Statuses)
-        self.HLB.stateChanged.connect(self.Statuses)
+        self.LLLB.clicked.connect(self.Statuses)
+        self.RLLB.clicked.connect(self.Statuses)
+        self.LALB.clicked.connect(self.Statuses)
+        self.RALB.clicked.connect(self.Statuses)
+        self.SLB.clicked.connect(self.Statuses)
+        self.TLB.clicked.connect(self.Statuses)
+        self.HLB.clicked.connect(self.Statuses)
 
         #Heavy bleed enables
-        self.LLHB.stateChanged.connect(self.Statuses)
-        self.RLHB.stateChanged.connect(self.Statuses)
-        self.LAHB.stateChanged.connect(self.Statuses)
-        self.RAHB.stateChanged.connect(self.Statuses)
-        self.SHB.stateChanged.connect(self.Statuses)
-        self.THB.stateChanged.connect(self.Statuses)
-        self.HHB.stateChanged.connect(self.Statuses)
+        self.LLHB.clicked.connect(self.Statuses)
+        self.RLHB.clicked.connect(self.Statuses)
+        self.LAHB.clicked.connect(self.Statuses)
+        self.RAHB.clicked.connect(self.Statuses)
+        self.SHB.clicked.connect(self.Statuses)
+        self.THB.clicked.connect(self.Statuses)
+        self.HHB.clicked.connect(self.Statuses)
 
         #Fracture enables
-        self.LLFB.stateChanged.connect(self.Statuses)
-        self.RLFB.stateChanged.connect(self.Statuses)
-        self.LAFB.stateChanged.connect(self.Statuses)
-        self.RAFB.stateChanged.connect(self.Statuses)
+        self.LLFB.clicked.connect(self.Statuses)
+        self.RLFB.clicked.connect(self.Statuses)
+        self.LAFB.clicked.connect(self.Statuses)
+        self.RAFB.clicked.connect(self.Statuses)
 
         #Health bar changes
         self.LLHealth.returnPressed.connect(self.ChangeHealth)
@@ -51,9 +125,24 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.Energy.returnPressed.connect(self.ChangeAdditional)
         self.Hydration.returnPressed.connect(self.ChangeAdditional)
 
+        #Injector activates
+        self.UMorphine.clicked.connect(self.MorphineSelect)
+        self.UL1.clicked.connect(self.L1Select)
+        self.UTrimadol.clicked.connect(self.TrimadolSelect)
+        self.UAdrenaline.clicked.connect(self.AdrenalineSelect)
+        self.UPropital.clicked.connect(self.PropitalSelect)
+        self.UETG.clicked.connect(self.ETGSelect)
+        self.UPerfotora.clicked.connect(self.PerfotoraSelect)
+        self.UAHF1.clicked.connect(self.AHF1Select)
+        self.UZagustin.clicked.connect(self.ZagustinSelect)
+        self.UPNB.clicked.connect(self.PNBSelect)
+        self.UObdolbos.clicked.connect(self.ObdolbosSelect)
+        self.UObdolbos2.clicked.connect(self.Obdolbos2Select)
+        self.UMULE.clicked.connect(self.MULESelect)
+
         #Real time
         self.SetTimer = QTimer()
-        self.timeStep = 500
+        self.timeStep = 250
         self.SetTimer.start(self.timeStep)
         self.SetTimer.timeout.connect(self.run)
 
@@ -64,7 +153,21 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
 
     #Function to activate statuses
     def step(self):
+        self.PMC.effect(self.morphine.simulate())
+        self.PMC.effect(self.l1.simulate())
+        self.PMC.effect(self.trimadol.simulate())
+        self.PMC.effect(self.adrenaline.simulate())
+        self.PMC.effect(self.propital.simulate())
+        self.PMC.effect(self.eTG.simulate())
+        self.PMC.effect(self.perfotora.simulate())
+        self.PMC.effect(self.aHF1.simulate())
+        self.PMC.effect(self.zagustin.simulate())
+        self.PMC.effect(self.pNB.simulate())
+        self.PMC.effect(self.obdolbos.simulate())
+        self.PMC.effect(self.obdolbos2.simulate())
+        self.PMC.effect(self.mULE.simulate())
         self.PMC.timeStep()
+
     #Function to get values constantly
     def run(self):
         #Gets the PMC health and displays them
@@ -94,10 +197,11 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.OverallHealthValue.setText(str(val) + "/440")
         #Gets the PMC statuses and displays them
         val = self.PMC.getWeight()
-        if(val < 30):
+        buff = self.PMC.getStronger()
+        if(val < 30 + buff):
             self.HO.hide()
             self.WeightValue.setText('<html><head/><body><p><span style=" font-size:12pt; font-weight:700; color:#d7ffcb;">' + str(val) + '/ 60</span></p><p><br/></p><p><br/></p></body></html>')
-        elif(val < 60):
+        elif(val < 60 + buff):
             self.WeightValue.setText('<html><head/><body><p><span style=" font-size:12pt; font-weight:700; color:#ffe357;">' + str(val) + '/ 60</span></p><p><br/></p><p><br/></p></body></html>')
             self.HO.show()
         else:
@@ -217,11 +321,50 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         else:
             self.HPK.hide()
 
+    def MorphineSelect(self):
+        self.morphine.start()
+
+    def L1Select(self):
+        self.l1.start()
+
+    def TrimadolSelect(self):
+        self.trimadol.start()
+
+    def AdrenalineSelect(self):
+        self.adrenaline.start()
+
+    def PropitalSelect(self):
+        self.propital.start()
+
+    def ETGSelect(self):
+        self.eTG.start()
+
+    def PerfotoraSelect(self):
+        self.perfotora.start()
+
+    def AHF1Select(self):
+        self.aHF1.start()
+
+    def ZagustinSelect(self):
+        self.zagustin.start()
+
+    def PNBSelect(self):
+        self.pNB.start()
+
+    def ObdolbosSelect(self):
+        self.obdolbos.start()
+    def Obdolbos2Select(self):
+        self.obdolbos2.start()
+
+    def MULESelect(self):
+        self.mULE.start()
+
 
         
 
     #Functions for limb statuses
     def Statuses(self):
+        
         self.PMC.setLeftLegStatus(self.LLLB.isChecked(), self.LLHB.isChecked(), self.LLFB.isChecked())
         self.PMC.setRightLegStatus(self.RLLB.isChecked(), self.RLHB.isChecked(), self.RLFB.isChecked())
         self.PMC.setLeftArmStatus(self.LALB.isChecked(), self.LAHB.isChecked(), self.LAFB.isChecked())
@@ -368,6 +511,9 @@ if __name__ == "__main__":
     ui.Obdolbos2.setPixmap(pixmap)
     pixmap = QPixmap("New folder/M.U.L.E..webp")
     ui.MULE.setPixmap(pixmap)
+    pixmap = QPixmap("New folder/End.png")
+    ui.end.setPixmap(pixmap)
+    ui.end.hide()
     
     sys.exit(app.exec())
     

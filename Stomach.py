@@ -27,3 +27,8 @@ class Stomach():
         self.health = self.health - val
         if(self.health < 0):
             self.health = 0
+
+    def addHealth(self, val):
+        self.health = self.health + val
+        if(self.health > 70):
+            self.health = 70
