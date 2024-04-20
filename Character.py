@@ -24,6 +24,11 @@ class Character():
         self.Head = Head()
         self.count = 0
         self.painkill = False
+        #Effect values
+        self.stronger = 0
+        self.tired = 0
+        self.thirst = 0
+        self.hp = 0
 
     #Function to calculate total health
     def calculateTotal(self):
@@ -140,10 +145,10 @@ class Character():
         return self.weight
     
     def getEnergy(self):
-        return self.energy
+        return round(self.energy)
 
     def getHydration(self):
-        return self.hydration
+        return round(self.hydration)
     
     def getIfFracture(self):
         (hold, hold, frac1) = self.LLeg.getStatus()
@@ -157,10 +162,18 @@ class Character():
     
     def timeStep(self):
         self.count += 1
+        self.energy += self.tired
+        self.tired = 0
         if((self.count % 15 == 0)):
             self.energy -= 1
+        if(self.energy < 0):
+            self.energy = 0
+        self.hydration += self.thirst
+        self.thirst = 0
         if((self.count % 20 == 0)):
             self.hydration -= 1
+        if(self.hydration < 0):
+            self.hydration = 0
         (l1, h1, hold) = self.LLeg.getStatus()
         (l2, h2, hold) = self.RLeg.getStatus()
         (l3, h3, hold) = self.LArm.getStatus()
@@ -280,8 +293,61 @@ class Character():
             self.Stomach.subHealth(0.9)
             self.Thorax.subHealth(0.9)
             self.Head.subHealth(0.9)
+        limbs = 0
+        if(self.LLeg.getHealth() < 65):
+            limbs += 1
+        if(self.RLeg.getHealth() < 65):
+            limbs += 1
+        if(self.LArm.getHealth() < 60):
+            limbs += 1
+        if(self.RArm.getHealth() < 60):
+            limbs += 1
+        if(self.Stomach.getHealth() < 70):
+            limbs += 1
+        if(self.Thorax.getHealth() < 85):
+            limbs += 1
+        if(self.Head.getHealth() < 35):
+            limbs += 1
+        if(self.LLeg.getHealth() < 65):
+            self.LLeg.addHealth(self.hp/limbs)
+        if(self.RLeg.getHealth() < 65):
+            self.RLeg.addHealth(self.hp/limbs)
+        if(self.LArm.getHealth() < 60):
+            self.LArm.addHealth(self.hp/limbs)
+        if(self.RArm.getHealth() < 60):
+            self.RArm.addHealth(self.hp/limbs)
+        if(self.Stomach.getHealth() < 70):
+            self.Stomach.addHealth(self.hp/limbs)
+        if(self.Thorax.getHealth() < 85):
+            self.Thorax.addHealth(self.hp/limbs)
+        if(self.Head.getHealth() < 35):
+            self.Head.addHealth(self.hp/limbs)
+        self.hp = 0      
+
 
         self.calculateTotal()
+
+    def effect(self,effects):
+        if(effects[0]):
+            self.painkill = True 
+        if(effects[1] > self.stronger):
+            self.stronger = effects[1]
+        if(effects[2]):
+            self.LLeg.setStatus(False, False, self.LLeg.getStatus()[2])
+            self.RLeg.setStatus(False, False, self.RLeg.getStatus()[2])
+            self.LArm.setStatus(False, False, self.LArm.getStatus()[2])
+            self.RArm.setStatus(False, False, self.RArm.getStatus()[2])
+            self.Stomach.setStatus(False, False)
+            self.Thorax.setStatus(False, False)
+            self.Head.setStatus(False, False)
+        self.tired += effects[3]
+        self.thirst += effects[4]
+        self.hp += effects[5]
+
+    def getStronger(self):
+        return self.stronger
+
+
         
 
 

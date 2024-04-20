@@ -1312,7 +1312,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>30</y>
+        <y>20</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1328,7 +1328,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>100</y>
+        <y>90</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1344,7 +1344,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>170</y>
+        <y>160</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1360,7 +1360,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>240</y>
+        <y>230</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1376,7 +1376,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>520</y>
+        <y>510</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1392,7 +1392,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>450</y>
+        <y>440</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1408,7 +1408,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>310</y>
+        <y>300</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1424,7 +1424,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>380</y>
+        <y>370</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1439,8 +1439,8 @@
      <widget class="QRadioButton" name="MULEB">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>240</y>
+        <x>290</x>
+        <y>230</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1455,8 +1455,8 @@
      <widget class="QRadioButton" name="Obdolbos2B">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>170</y>
+        <x>290</x>
+        <y>160</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1471,8 +1471,8 @@
      <widget class="QRadioButton" name="PNBB">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>30</y>
+        <x>290</x>
+        <y>20</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1487,8 +1487,8 @@
      <widget class="QRadioButton" name="ObdolbosB">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>100</y>
+        <x>290</x>
+        <y>90</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1504,7 +1504,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>590</y>
+        <y>580</y>
         <width>51</width>
         <height>20</height>
        </rect>
@@ -1514,6 +1514,178 @@
       </property>
       <property name="checkable">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UMorphine">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>40</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UL1">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>110</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UTrimadol">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>180</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UAdrenaline">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>250</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UPropital">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>320</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UETG">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>390</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UPerfotora">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>460</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UAHF1">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>530</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UZagustin">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>600</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UPNB">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>40</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UObdolbos">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>110</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UObdolbos2">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>180</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UMULE">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>250</y>
+        <width>31</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Use</string>
       </property>
      </widget>
     </widget>
@@ -1869,6 +2041,19 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700; color:#fffb7d;&quot;&gt;100/100&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QLabel" name="end">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>200</y>
+      <width>1041</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/end/End.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
    <zorder>Body</zorder>
    <zorder>RightLegHealth</zorder>
    <zorder>LeftLegHealth</zorder>
@@ -1914,10 +2099,12 @@
    <zorder>energy</zorder>
    <zorder>HydrationValue</zorder>
    <zorder>EnergyValue</zorder>
+   <zorder>end</zorder>
   </widget>
  </widget>
  <resources>
   <include location="New folder/overweight.qrc"/>
+  <include location="New folder/end.qrc"/>
   <include location="New folder/injectors.qrc"/>
   <include location="New folder/water.qrc"/>
   <include location="New folder/body.qrc"/>
