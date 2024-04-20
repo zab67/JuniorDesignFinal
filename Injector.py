@@ -1,6 +1,8 @@
 class Injector():
-    def __init__(self):
-        #Selected
+    def __init__(self, odds = 100):
+        #obdolbos odds
+        self.odds = odds
+        #Start values
         self.begin = False
         self.count = 0
 
@@ -43,19 +45,23 @@ class Injector():
         self.healthDB_time = 0
         self.healthDB_delay = 0
 
+    #Painkill effect for injector
     def addPK(self, time, delay):
         self.painkill_time = time
         self.painkill_delay = delay
 
+    #Increase strength effect for injector
     def addStrength(self, val, time, delay):
         self.strength = val
         self.strength_time = time
         self.strength_delay = delay
-
+    
+    #Effect to stop bleeds for injector
     def addNoBleed(self, time, delay):
         self.noBleed_time = time
         self.noBleed_delay = delay
 
+    #Adds the energy, hydration, and health attributes of injectors
     def addEnergyRate(self, val, time, delay):
         if(val > 0):
             self.energyB = val
@@ -90,10 +96,12 @@ class Injector():
         self.health = val
         self.health_delay = delay
 
+    #Function to start timer count
     def start(self):
         self.begin = True
         self.count = 0
 
+    #Funtion to run the stimulant on timer
     def simulate(self):
         if(self.begin and self.count < 1800):
             if(self.count >= self.painkill_delay and self.count < (self.painkill_delay + self.painkill_time)):

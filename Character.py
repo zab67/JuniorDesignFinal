@@ -15,6 +15,7 @@ class Character():
         self.weight = 6
         self.energy = 100
         self.hydration = 100
+        #Limbs
         self.LLeg = Leg()
         self.RLeg = Leg()
         self.LArm = Arm()
@@ -22,9 +23,10 @@ class Character():
         self.Stomach = Stomach()
         self.Thorax = Thorax()
         self.Head = Head()
+        #Count timer
         self.count = 0
-        self.painkill = False
         #Effect values
+        self.painkill = False
         self.stronger = 0
         self.tired = 0
         self.thirst = 0
@@ -45,6 +47,7 @@ class Character():
         self.hydration = val
 
     #Functions to set the health of limbs + correct total
+    #Functions to set limb statuses
     def setLeftLeg(self, val):
         self.LLeg.setHealth(val)
         self.calculateTotal()
@@ -94,7 +97,7 @@ class Character():
     def setHeadStatus(self, l, h):
         self.Head.setStatus(l, h)
 
-    #Functions to return health values
+    #Functions to return health values and limb statuses
     def getTotalHealth(self):
         return round(self.totalHealth)
 
@@ -150,6 +153,7 @@ class Character():
     def getHydration(self):
         return round(self.hydration)
     
+    #Function to tell if there is a break
     def getIfFracture(self):
         (hold, hold, frac1) = self.LLeg.getStatus()
         (hold, hold, frac2) = self.RLeg.getStatus()
@@ -157,11 +161,14 @@ class Character():
         (hold, hold, frac4) = self.RArm.getStatus()
         return(frac1 or frac2 or frac3 or frac4)
     
+    #Return if painkill is true
     def getIfPainKill(self):
         return self.painkill
     
+    #Simulates the effects that occur every second
     def timeStep(self):
         self.count += 1
+        #Hydration and energy effects
         self.energy += self.tired
         self.tired = 0
         if((self.count % 15 == 0)):
@@ -174,6 +181,7 @@ class Character():
             self.hydration -= 1
         if(self.hydration < 0):
             self.hydration = 0
+        #Gets the bleeds of limbs
         (l1, h1, hold) = self.LLeg.getStatus()
         (l2, h2, hold) = self.RLeg.getStatus()
         (l3, h3, hold) = self.LArm.getStatus()
@@ -181,6 +189,7 @@ class Character():
         (l5, h5) = self.Stomach.getStatus()
         (l6, h6) = self.Thorax.getStatus()
         (l7, h7) = self.Head.getStatus()
+        #Calculates the new health of limbs given bleeds
         if(l1 and (self.count % 6 == 0)):
             self.LLeg.subHealth(0.8)
             self.RLeg.subHealth(0.8)
@@ -293,6 +302,7 @@ class Character():
             self.Stomach.subHealth(0.9)
             self.Thorax.subHealth(0.9)
             self.Head.subHealth(0.9)
+        #Calculkates the heal per limb
         limbs = 0
         if(self.LLeg.getHealth() < 65):
             limbs += 1
@@ -308,6 +318,7 @@ class Character():
             limbs += 1
         if(self.Head.getHealth() < 35):
             limbs += 1
+        #Heals the limbs
         if(self.LLeg.getHealth() < 65):
             self.LLeg.addHealth(self.hp/limbs)
         if(self.RLeg.getHealth() < 65):
@@ -322,11 +333,10 @@ class Character():
             self.Thorax.addHealth(self.hp/limbs)
         if(self.Head.getHealth() < 35):
             self.Head.addHealth(self.hp/limbs)
-        self.hp = 0      
-
-
+        self.hp = 0   
         self.calculateTotal()
 
+    #Acitivates the effect of stimulant injectors
     def effect(self,effects):
         if(effects[0]):
             self.painkill = True 
@@ -344,6 +354,7 @@ class Character():
         self.thirst += effects[4]
         self.hp += effects[5]
 
+    #Returns the strength boost
     def getStronger(self):
         return self.stronger
 
