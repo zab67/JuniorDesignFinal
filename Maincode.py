@@ -4,21 +4,22 @@ from PyQt6.QtCore import QTimer
 from PyQt6.QtWidgets import QMainWindow
 from MainWindow import Ui_MainWindow  # Assuming MainWindow is your custom QMainWindow subclass
 
-#Character class
+#Character class for effect simulatiom
 import Character
 from Character import *
 
-#Injector class
+#Injector class for creating stimulant injectors
 import Injector
 from Injector import *
 
 class Setup(Ui_MainWindow):  # Subclass QMainWindow
     def __init__(self):
         super().__init__()
+        
         #Create simulated body
         self.PMC = Character()
 
-        #initilize all injectors
+        #initilize all injectors with their immidiate values 
         self.morphine = Injector()
         self.morphine.addPK(305, 0)
         self.morphine.addEnergyRate(-10,1,0)
@@ -111,7 +112,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.LAFB.clicked.connect(self.Statuses)
         self.RAFB.clicked.connect(self.Statuses)
 
-        #Health bar changes
+        #Health bar force sets
         self.LLHealth.returnPressed.connect(self.ChangeHealth)
         self.RLHealth.returnPressed.connect(self.ChangeHealth)
         self.LAHealth.returnPressed.connect(self.ChangeHealth)
@@ -120,12 +121,12 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.THealth.returnPressed.connect(self.ChangeHealth)
         self.HHealth.returnPressed.connect(self.ChangeHealth)
 
-        #Extra stats
+        #Extra stats force sets
         self.Weight.returnPressed.connect(self.ChangeAdditional)
         self.Energy.returnPressed.connect(self.ChangeAdditional)
         self.Hydration.returnPressed.connect(self.ChangeAdditional)
 
-        #Injector activates
+        #Injector activates which start timeline
         self.UMorphine.clicked.connect(self.MorphineSelect)
         self.UL1.clicked.connect(self.L1Select)
         self.UTrimadol.clicked.connect(self.TrimadolSelect)
@@ -139,19 +140,23 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.UObdolbos.clicked.connect(self.ObdolbosSelect)
         self.UObdolbos2.clicked.connect(self.Obdolbos2Select)
         self.UMULE.clicked.connect(self.MULESelect)
+        self.speed.valueChanged.connect(self.timers)
+        #Time speed calculation
+        self.timers()
 
-        #Real time
+    def timers(self):
+        #Real time timers to run simulation
         self.SetTimer = QTimer()
-        self.timeStep = 250
+        self.timeStep = 500/(self.speed.value())
         self.SetTimer.start(self.timeStep)
-        self.SetTimer.timeout.connect(self.run)
+        self.SetTimer.timeout.connect(self.run) # Runs UI
 
         self.MainTimer = QTimer()
-        self.timeStep = 1000
+        self.timeStep = 1000/(self.speed.value())
         self.MainTimer.start(self.timeStep)
-        self.MainTimer.timeout.connect(self.step)
+        self.MainTimer.timeout.connect(self.step) # runs Interactions
 
-    #Function to activate statuses
+    #Function to activate stimulant effects
     def step(self):
         self.PMC.effect(self.morphine.simulate())
         self.PMC.effect(self.l1.simulate())
@@ -168,7 +173,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.PMC.effect(self.mULE.simulate())
         self.PMC.timeStep()
 
-    #Function to get values constantly
+    #Function to get values constantly for user interface
     def run(self):
         #Gets the PMC health and displays them
         val = self.PMC.getLeftLeg()
@@ -212,6 +217,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         val = self.PMC.getHydration()
         self.HydrationValue.setText('<html><head/><body><p><span style=" font-size:14pt; font-weight:700; color:#6ef3ff;">' + str(val) + '/100</span></p><p><br/></p></body></html>')
         (light, heavy, fracture) = self.PMC.getLeftLegStatus()
+        #Gets the limb effects and displays them
         if(light):
             self.LLL.show()
         else:
@@ -320,7 +326,8 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
             self.HPK.show()
         else:
             self.HPK.hide()
-
+    
+    #Functions for when the user starts an injector
     def MorphineSelect(self):
         self.morphine.start()
 
@@ -364,7 +371,6 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
 
     #Functions for limb statuses
     def Statuses(self):
-        
         self.PMC.setLeftLegStatus(self.LLLB.isChecked(), self.LLHB.isChecked(), self.LLFB.isChecked())
         self.PMC.setRightLegStatus(self.RLLB.isChecked(), self.RLHB.isChecked(), self.RLFB.isChecked())
         self.PMC.setLeftArmStatus(self.LALB.isChecked(), self.LAHB.isChecked(), self.LAFB.isChecked())
@@ -418,6 +424,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         except:
             return
 
+    #Changes value for additonal body details
     def ChangeAdditional(self):
         try:
             val = int(self.Weight.text())
