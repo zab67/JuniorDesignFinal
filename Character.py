@@ -15,6 +15,9 @@ class Character():
         self.weight = 6
         self.energy = 100
         self.hydration = 100
+        #Rates
+        self.energyRate = 0
+        self.hydrationRate = 0
         #Limbs
         self.LLeg = Leg()
         self.RLeg = Leg()
@@ -170,12 +173,14 @@ class Character():
         self.count += 1
         #Hydration and energy effects
         self.energy += self.tired
+        self.energyRate = self.tired - 0.05
         self.tired = 0
         if((self.count % 15 == 0)):
             self.energy -= 1
         if(self.energy < 0):
             self.energy = 0
         self.hydration += self.thirst
+        self.hydrationRate = self.thirst - 0.07
         self.thirst = 0
         if((self.count % 20 == 0)):
             self.hydration -= 1
@@ -357,6 +362,10 @@ class Character():
     #Returns the strength boost
     def getStronger(self):
         return self.stronger
+    
+    #Returns the rates
+    def getRates(self):
+        return (self.energyRate, self.hydrationRate)
 
 
         
