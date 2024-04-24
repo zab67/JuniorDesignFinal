@@ -15,6 +15,9 @@ class Character():
         self.weight = 6
         self.energy = 100
         self.hydration = 100
+        #Rates
+        self.energyRate = 0
+        self.hydrationRate = 0
         #Limbs
         self.LLeg = Leg()
         self.RLeg = Leg()
@@ -170,17 +173,23 @@ class Character():
         self.count += 1
         #Hydration and energy effects
         self.energy += self.tired
+        self.energyRate = self.tired - 0.05
         self.tired = 0
         if((self.count % 15 == 0)):
             self.energy -= 1
         if(self.energy < 0):
             self.energy = 0
+        if(self.energy > 100):
+            self.energy = 100
         self.hydration += self.thirst
+        self.hydrationRate = self.thirst - 0.07
         self.thirst = 0
         if((self.count % 20 == 0)):
             self.hydration -= 1
         if(self.hydration < 0):
             self.hydration = 0
+        if(self.hydration > 100):
+            self.hydration = 100
         #Gets the bleeds of limbs
         (l1, h1, hold) = self.LLeg.getStatus()
         (l2, h2, hold) = self.RLeg.getStatus()
@@ -319,20 +328,53 @@ class Character():
         if(self.Head.getHealth() < 35):
             limbs += 1
         #Heals the limbs
-        if(self.LLeg.getHealth() < 65):
-            self.LLeg.addHealth(self.hp/limbs)
-        if(self.RLeg.getHealth() < 65):
-            self.RLeg.addHealth(self.hp/limbs)
-        if(self.LArm.getHealth() < 60):
-            self.LArm.addHealth(self.hp/limbs)
-        if(self.RArm.getHealth() < 60):
-            self.RArm.addHealth(self.hp/limbs)
-        if(self.Stomach.getHealth() < 70):
-            self.Stomach.addHealth(self.hp/limbs)
-        if(self.Thorax.getHealth() < 85):
-            self.Thorax.addHealth(self.hp/limbs)
-        if(self.Head.getHealth() < 35):
-            self.Head.addHealth(self.hp/limbs)
+        if(self.hp > 0):
+            if(self.LLeg.getHealth() < 65):
+                self.LLeg.addHealth(self.hp/limbs)
+            if(self.RLeg.getHealth() < 65):
+                self.RLeg.addHealth(self.hp/limbs)
+            if(self.LArm.getHealth() < 60):
+                self.LArm.addHealth(self.hp/limbs)
+            if(self.RArm.getHealth() < 60):
+                self.RArm.addHealth(self.hp/limbs)
+            if(self.Stomach.getHealth() < 70):
+                self.Stomach.addHealth(self.hp/limbs)
+            if(self.Thorax.getHealth() < 85):
+                self.Thorax.addHealth(self.hp/limbs)
+            if(self.Head.getHealth() < 35):
+                self.Head.addHealth(self.hp/limbs)
+            limbs = 0
+        elif(self.hp < 0):
+            if(self.LLeg.getHealth() > 0):
+                limbs += 1
+            if(self.RLeg.getHealth() > 0):
+                limbs += 1
+            if(self.LArm.getHealth() > 0):
+                limbs += 1
+            if(self.RArm.getHealth() > 0):
+                limbs += 1
+            if(self.Stomach.getHealth() > 0):
+                limbs += 1
+            if(self.Thorax.getHealth() > 0):
+                limbs += 1
+            if(self.Head.getHealth() > 0):
+                limbs += 1
+            if(self.LLeg.getHealth() > 0):
+                self.LLeg.addHealth(self.hp/limbs)
+            if(self.RLeg.getHealth() > 0):
+                self.RLeg.addHealth(self.hp/limbs)
+            if(self.LArm.getHealth() > 0):
+                self.LArm.addHealth(self.hp/limbs)
+            if(self.RArm.getHealth() > 0):
+                self.RArm.addHealth(self.hp/limbs)
+            if(self.Stomach.getHealth() > 0):
+                self.Stomach.addHealth(self.hp/limbs)
+            if(self.Thorax.getHealth() > 0):
+                self.Thorax.addHealth(self.hp/limbs)
+            if(self.Head.getHealth() > 0):
+                self.Head.addHealth(self.hp/limbs)
+            limbs = 0
+        
         self.hp = 0   
         self.calculateTotal()
 
@@ -353,11 +395,60 @@ class Character():
         self.tired += effects[3]
         self.thirst += effects[4]
         self.hp += effects[5]
+        
 
     #Returns the strength boost
     def getStronger(self):
         return self.stronger
+    
+    #Returns the rates
+    def getRates(self):
+        return (self.energyRate, self.hydrationRate)
 
+    #Returns the body data for injector
+    def getHealthData(self):
+        return (self.getLeftLeg(), self.getRightLeg(), self.getLeftArm(), self.getRightArm(), self.getStomach(), self.getThorax(), self.getHead())
+    
+    def getBleedData(self):
+        countl = 0
+        counth = 0
+        data = self.getLeftLegStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getRightLegStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getLeftArmStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getRightArmStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getStomachStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getThoraxStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getHeadStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        
+        return (countl, counth)
 
         
 

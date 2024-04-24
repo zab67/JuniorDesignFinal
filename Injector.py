@@ -1,5 +1,7 @@
+import random
+
 class Injector():
-    def __init__(self, odds = 100):
+    def __init__(self, odds = 1):
         #obdolbos odds
         self.odds = odds
         #Start values
@@ -52,9 +54,11 @@ class Injector():
 
     #Increase strength effect for injector
     def addStrength(self, val, time, delay):
-        self.strength = val
-        self.strength_time = time
-        self.strength_delay = delay
+        rand = random.random()
+        if(rand <= self.odds):
+            self.strength = val
+            self.strength_time = time
+            self.strength_delay = delay
     
     #Effect to stop bleeds for injector
     def addNoBleed(self, time, delay):
@@ -63,34 +67,40 @@ class Injector():
 
     #Adds the energy, hydration, and health attributes of injectors
     def addEnergyRate(self, val, time, delay):
-        if(val > 0):
-            self.energyB = val
-            self.energyB_time = time
-            self.energyB_delay = delay
-        else:
-            self.energyDB = val
-            self.energyDB_time = time
-            self.energyDB_delay = delay
+        rand = random.random()
+        if(rand <= self.odds):
+            if(val > 0):
+                self.energyB = val
+                self.energyB_time = time
+                self.energyB_delay = delay
+            else:
+                self.energyDB = val
+                self.energyDB_time = time
+                self.energyDB_delay = delay
     
     def addHydrationRate(self, val, time, delay):
-        if(val > 0):
-            self.hydrationB = val
-            self.hydrationB_time = time
-            self.hydrationB_delay = delay
-        else:
-            self.hydrationDB = val
-            self.hydrationDB_time = time
-            self.hydrationDB_delay = delay
+        rand = random.random()
+        if(rand <= self.odds):
+            if(val > 0):
+                self.hydrationB = val
+                self.hydrationB_time = time
+                self.hydrationB_delay = delay
+            else:
+                self.hydrationDB = val
+                self.hydrationDB_time = time
+                self.hydrationDB_delay = delay
 
     def addHealthRate(self, val, time, delay):
-        if(val > 0):
-            self.healthB = val
-            self.healthB_time = time
-            self.healthB_delay = delay
-        else:
-            self.healthDB = val
-            self.healthDB_time = time
-            self.healthDB_delay = delay
+        rand = random.random()
+        if(rand <= self.odds):
+            if(val > 0):
+                self.healthB = val
+                self.healthB_time = time
+                self.healthB_delay = delay
+            else:
+                self.healthDB = val
+                self.healthDB_time = time
+                self.healthDB_delay = delay
     
     def addHealth(self, val, delay):
         self.health = val
@@ -140,4 +150,10 @@ class Injector():
             return (pk,st,nb,en,hy,he)
         else:
             return (False, 0, False, 0, 0, 0)
+
+    def getScore(self, health, bleeds, fracture):
+        score = 0
+        
+        return score
+
     

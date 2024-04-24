@@ -75,7 +75,12 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.pNB.addHealthRate(3,40,1)
         self.pNB.addHealth(-20, 41)
 
-        self.obdolbos = Injector()
+        self.obdolbos = Injector(0.25)
+        self.obdolbos.addStrength(10,600,1)
+        self.obdolbos.addHealthRate(1,600,1)
+        self.obdolbos.addHydrationRate(-1,600,1)
+        self.obdolbos.addEnergyRate(-1,600,1)
+        self.obdolbos.addHealthRate(-600,600,1)
 
         self.obdolbos2 = Injector()
         self.obdolbos2.addStrength((27 + 20),1800,1)
@@ -172,9 +177,12 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.PMC.effect(self.obdolbos2.simulate())
         self.PMC.effect(self.mULE.simulate())
         self.PMC.timeStep()
+        self.setBest()
 
     #Function to get values constantly for user interface
     def run(self):
+        if(self.PMC.getHead() == 0 or self.PMC.getThorax() == 0 or self.PMC.getEnergy() == 0):
+            self.end.show()
         #Gets the PMC health and displays them
         val = self.PMC.getLeftLeg()
         self.LeftLegHealth.setValue(val)
@@ -217,6 +225,16 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         val = self.PMC.getHydration()
         self.HydrationValue.setText('<html><head/><body><p><span style=" font-size:14pt; font-weight:700; color:#6ef3ff;">' + str(val) + '/100</span></p><p><br/></p></body></html>')
         (light, heavy, fracture) = self.PMC.getLeftLegStatus()
+        #Gets the rate of decrease
+        (en, hy) = self.PMC.getRates()
+        if(en < 0):
+            self.EnergyRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#fffb7d;">\\/ ' + str(abs(en)) + '</span></p></body></html>')
+        else:
+            self.EnergyRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#fffb7d;">/\\ ' + str(en) + '</span></p></body></html>')
+        if(hy < 0):
+            self.HydrationRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#6ef3ff;">\\/ ' + str(abs(hy)) + '</span></p></body></html>')
+        else:
+            self.HydrationRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#6ef3ff;">/\\ ' + str(hy) + '</span></p></body></html>')
         #Gets the limb effects and displays them
         if(light):
             self.LLL.show()
@@ -326,6 +344,21 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
             self.HPK.show()
         else:
             self.HPK.hide()
+
+    def setBest(self):
+        self.morphine.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.l1.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.trimadol.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.adrenaline.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.propital.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.eTG.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.perfotora.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.aHF1.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.zagustin.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.pNB.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.obdolbos.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.obdolbos2.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
+        self.mULE.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
     
     #Functions for when the user starts an injector
     def MorphineSelect(self):

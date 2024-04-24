@@ -2108,6 +2108,32 @@
      <string>Simulation Speed</string>
     </property>
    </widget>
+   <widget class="QLabel" name="HydrationRate">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>690</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; color:#6ef3ff;&quot;&gt;\/ 1.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="EnergyRate">
+    <property name="geometry">
+     <rect>
+      <x>960</x>
+      <y>640</y>
+      <width>49</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700; color:#fffb7d;&quot;&gt;\/ 1.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
    <zorder>Body</zorder>
    <zorder>RightLegHealth</zorder>
    <zorder>LeftLegHealth</zorder>
@@ -2157,6 +2183,8 @@
    <zorder>speed</zorder>
    <zorder>label_6</zorder>
    <zorder>label_2</zorder>
+   <zorder>HydrationRate</zorder>
+   <zorder>EnergyRate</zorder>
   </widget>
  </widget>
  <resources>

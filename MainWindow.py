@@ -556,6 +556,12 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(parent=self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(150, 670, 101, 16))
         self.label_2.setObjectName("label_2")
+        self.HydrationRate = QtWidgets.QLabel(parent=self.centralwidget)
+        self.HydrationRate.setGeometry(QtCore.QRect(960, 690, 49, 16))
+        self.HydrationRate.setObjectName("HydrationRate")
+        self.EnergyRate = QtWidgets.QLabel(parent=self.centralwidget)
+        self.EnergyRate.setGeometry(QtCore.QRect(960, 640, 49, 20))
+        self.EnergyRate.setObjectName("EnergyRate")
         self.Body.raise_()
         self.RightLegHealth.raise_()
         self.LeftLegHealth.raise_()
@@ -605,6 +611,8 @@ class Ui_MainWindow(object):
         self.speed.raise_()
         self.label_6.raise_()
         self.label_2.raise_()
+        self.HydrationRate.raise_()
+        self.EnergyRate.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -738,6 +746,8 @@ class Ui_MainWindow(object):
         self.end.setText(_translate("MainWindow", "<html><head/><body><p><img src=\":/end/End.png\"/></p></body></html>"))
         self.label_6.setText(_translate("MainWindow", "1x        3x        5x         7x        10x"))
         self.label_2.setText(_translate("MainWindow", "Simulation Speed"))
+        self.HydrationRate.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700; color:#6ef3ff;\">\\/ 1.00</span></p></body></html>"))
+        self.EnergyRate.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:700; color:#fffb7d;\">\\/ 1.00</span></p></body></html>"))
 
 
 if __name__ == "__main__":
