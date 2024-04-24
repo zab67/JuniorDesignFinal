@@ -179,6 +179,8 @@ class Character():
             self.energy -= 1
         if(self.energy < 0):
             self.energy = 0
+        if(self.energy > 100):
+            self.energy = 100
         self.hydration += self.thirst
         self.hydrationRate = self.thirst - 0.07
         self.thirst = 0
@@ -186,6 +188,8 @@ class Character():
             self.hydration -= 1
         if(self.hydration < 0):
             self.hydration = 0
+        if(self.hydration > 100):
+            self.hydration = 100
         #Gets the bleeds of limbs
         (l1, h1, hold) = self.LLeg.getStatus()
         (l2, h2, hold) = self.RLeg.getStatus()
@@ -367,6 +371,50 @@ class Character():
     def getRates(self):
         return (self.energyRate, self.hydrationRate)
 
+    #Returns the body data for injector
+    def getHealthData(self):
+        return (self.getLeftLeg(), self.getRightLeg(), self.getLeftArm(), self.getRightArm(), self.getStomach(), self.getThorax(), self.getHead())
+    
+    def getBleedData(self):
+        countl = 0
+        counth = 0
+        data = self.getLeftLegStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getRightLegStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getLeftArmStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getRightArmStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getStomachStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getThoraxStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        data = self.getHeadStatus()
+        if(data[0]):
+            countl += 1
+        if(data[1]):
+            counth += 1
+        
+        return (countl, counth)
 
         
 
