@@ -32,3 +32,5 @@ class Head():
         self.health = self.health + val
         if(self.health > 35):
             self.health = 35
+        elif(self.health < 0):
+            self.health = 0

@@ -37,3 +37,5 @@ class Arm():
         self.health = self.health + val
         if(self.health > 60):
             self.health = 60
+        elif(self.health < 0):
+            self.health = 0

@@ -328,20 +328,53 @@ class Character():
         if(self.Head.getHealth() < 35):
             limbs += 1
         #Heals the limbs
-        if(self.LLeg.getHealth() < 65):
-            self.LLeg.addHealth(self.hp/limbs)
-        if(self.RLeg.getHealth() < 65):
-            self.RLeg.addHealth(self.hp/limbs)
-        if(self.LArm.getHealth() < 60):
-            self.LArm.addHealth(self.hp/limbs)
-        if(self.RArm.getHealth() < 60):
-            self.RArm.addHealth(self.hp/limbs)
-        if(self.Stomach.getHealth() < 70):
-            self.Stomach.addHealth(self.hp/limbs)
-        if(self.Thorax.getHealth() < 85):
-            self.Thorax.addHealth(self.hp/limbs)
-        if(self.Head.getHealth() < 35):
-            self.Head.addHealth(self.hp/limbs)
+        if(self.hp > 0):
+            if(self.LLeg.getHealth() < 65):
+                self.LLeg.addHealth(self.hp/limbs)
+            if(self.RLeg.getHealth() < 65):
+                self.RLeg.addHealth(self.hp/limbs)
+            if(self.LArm.getHealth() < 60):
+                self.LArm.addHealth(self.hp/limbs)
+            if(self.RArm.getHealth() < 60):
+                self.RArm.addHealth(self.hp/limbs)
+            if(self.Stomach.getHealth() < 70):
+                self.Stomach.addHealth(self.hp/limbs)
+            if(self.Thorax.getHealth() < 85):
+                self.Thorax.addHealth(self.hp/limbs)
+            if(self.Head.getHealth() < 35):
+                self.Head.addHealth(self.hp/limbs)
+            limbs = 0
+        elif(self.hp < 0):
+            if(self.LLeg.getHealth() > 0):
+                limbs += 1
+            if(self.RLeg.getHealth() > 0):
+                limbs += 1
+            if(self.LArm.getHealth() > 0):
+                limbs += 1
+            if(self.RArm.getHealth() > 0):
+                limbs += 1
+            if(self.Stomach.getHealth() > 0):
+                limbs += 1
+            if(self.Thorax.getHealth() > 0):
+                limbs += 1
+            if(self.Head.getHealth() > 0):
+                limbs += 1
+            if(self.LLeg.getHealth() > 0):
+                self.LLeg.addHealth(self.hp/limbs)
+            if(self.RLeg.getHealth() > 0):
+                self.RLeg.addHealth(self.hp/limbs)
+            if(self.LArm.getHealth() > 0):
+                self.LArm.addHealth(self.hp/limbs)
+            if(self.RArm.getHealth() > 0):
+                self.RArm.addHealth(self.hp/limbs)
+            if(self.Stomach.getHealth() > 0):
+                self.Stomach.addHealth(self.hp/limbs)
+            if(self.Thorax.getHealth() > 0):
+                self.Thorax.addHealth(self.hp/limbs)
+            if(self.Head.getHealth() > 0):
+                self.Head.addHealth(self.hp/limbs)
+            limbs = 0
+        
         self.hp = 0   
         self.calculateTotal()
 
@@ -362,6 +395,7 @@ class Character():
         self.tired += effects[3]
         self.thirst += effects[4]
         self.hp += effects[5]
+        
 
     #Returns the strength boost
     def getStronger(self):

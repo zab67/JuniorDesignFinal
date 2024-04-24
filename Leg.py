@@ -37,3 +37,5 @@ class Leg():
         self.health = self.health + val
         if(self.health > 65):
             self.health = 65
+        elif(self.health < 0):
+            self.health = 0

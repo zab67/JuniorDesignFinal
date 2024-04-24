@@ -54,7 +54,8 @@ class Injector():
 
     #Increase strength effect for injector
     def addStrength(self, val, time, delay):
-        if(random.random() <= self.odds):
+        rand = random.random()
+        if(rand <= self.odds):
             self.strength = val
             self.strength_time = time
             self.strength_delay = delay
@@ -66,7 +67,8 @@ class Injector():
 
     #Adds the energy, hydration, and health attributes of injectors
     def addEnergyRate(self, val, time, delay):
-        if(random.random() <= self.odds):
+        rand = random.random()
+        if(rand <= self.odds):
             if(val > 0):
                 self.energyB = val
                 self.energyB_time = time
@@ -77,7 +79,8 @@ class Injector():
                 self.energyDB_delay = delay
     
     def addHydrationRate(self, val, time, delay):
-        if(random.random() <= self.odds):
+        rand = random.random()
+        if(rand <= self.odds):
             if(val > 0):
                 self.hydrationB = val
                 self.hydrationB_time = time
@@ -88,7 +91,8 @@ class Injector():
                 self.hydrationDB_delay = delay
 
     def addHealthRate(self, val, time, delay):
-        if(random.random() <= self.odds):
+        rand = random.random()
+        if(rand <= self.odds):
             if(val > 0):
                 self.healthB = val
                 self.healthB_time = time
