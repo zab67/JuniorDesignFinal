@@ -12,6 +12,7 @@ git clone https://github.com/zab67/JuniorDesignFinal
 pip install pyqt6
 ```
 ### To run the system:
+- #### Open the JuniorDesignFinal Folder
 - #### Run MainCode.py
 - #### Once you are running the file a user interface will open
 
