@@ -218,7 +218,7 @@ class Injector():
             if(self.health + totalHealth> 440):
                 score -= (totalHealth + totalHeal - 440) * 5
         elif(self.health < 0):
-            score += self.health 
+            score += self.health * 5
 
         #Randomization of obdolbos makes it not good
         if(self.odds == 0.25):
