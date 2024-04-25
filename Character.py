@@ -15,9 +15,11 @@ class Character():
         self.weight = 6
         self.energy = 100
         self.hydration = 100
+        
         #Rates
         self.energyRate = 0
         self.hydrationRate = 0
+        
         #Limbs
         self.LLeg = Leg()
         self.RLeg = Leg()
@@ -26,8 +28,10 @@ class Character():
         self.Stomach = Stomach()
         self.Thorax = Thorax()
         self.Head = Head()
+       
         #Count timer
         self.count = 0
+        
         #Effect values
         self.painkill = False
         self.stronger = 0
@@ -146,7 +150,7 @@ class Character():
     def getHeadStatus(self):
         return self.Head.getStatus()
     
-    #Funtions for additonal details
+    #Funtions for additonal details of body
     def getWeight(self):
         return self.weight
     
@@ -156,7 +160,7 @@ class Character():
     def getHydration(self):
         return round(self.hydration)
     
-    #Function to tell if there is a break
+    #Function to return if there is a break
     def getIfFracture(self):
         (hold, hold, frac1) = self.LLeg.getStatus()
         (hold, hold, frac2) = self.RLeg.getStatus()
@@ -164,13 +168,14 @@ class Character():
         (hold, hold, frac4) = self.RArm.getStatus()
         return(frac1 or frac2 or frac3 or frac4)
     
-    #Return if painkill is true
+    #Return if painkill effect is on
     def getIfPainKill(self):
         return self.painkill
     
     #Simulates the effects that occur every second
     def timeStep(self):
         self.count += 1
+        
         #Hydration and energy effects
         self.energy += self.tired
         self.energyRate = self.tired - 0.05
@@ -190,6 +195,7 @@ class Character():
             self.hydration = 0
         if(self.hydration > 100):
             self.hydration = 100
+       
         #Gets the bleeds of limbs
         (l1, h1, hold) = self.LLeg.getStatus()
         (l2, h2, hold) = self.RLeg.getStatus()
@@ -198,6 +204,7 @@ class Character():
         (l5, h5) = self.Stomach.getStatus()
         (l6, h6) = self.Thorax.getStatus()
         (l7, h7) = self.Head.getStatus()
+        
         #Calculates the new health of limbs given bleeds
         if(l1 and (self.count % 6 == 0)):
             self.LLeg.subHealth(0.8)
@@ -311,7 +318,8 @@ class Character():
             self.Stomach.subHealth(0.9)
             self.Thorax.subHealth(0.9)
             self.Head.subHealth(0.9)
-        #Calculkates the heal per limb
+        
+        #Calculates the heal per limb
         limbs = 0
         if(self.LLeg.getHealth() < 65):
             limbs += 1
@@ -327,6 +335,7 @@ class Character():
             limbs += 1
         if(self.Head.getHealth() < 35):
             limbs += 1
+        
         #Heals the limbs
         if(self.hp > 0):
             if(self.LLeg.getHealth() < 65):
@@ -373,8 +382,39 @@ class Character():
                 self.Thorax.addHealth(self.hp/limbs)
             if(self.Head.getHealth() > 0):
                 self.Head.addHealth(self.hp/limbs)
-            limbs = 0
         
+        #Out of energy
+        limbs = 0
+        if(self.LLeg.getHealth() > 0):
+            limbs += 1
+        if(self.RLeg.getHealth() > 0):
+            limbs += 1
+        if(self.LArm.getHealth() > 0):
+            limbs += 1
+        if(self.RArm.getHealth() > 0):
+            limbs += 1
+        if(self.Stomach.getHealth() > 0):
+            limbs += 1
+        if(self.Thorax.getHealth() > 0):
+            limbs += 1
+        if(self.Head.getHealth() > 0):
+            limbs += 1
+        if(self.LLeg.getHealth() > 0 and self.energy == 0):
+            self.LLeg.addHealth(-1/limbs)
+        if(self.RLeg.getHealth() > 0 and self.energy == 0):
+            self.RLeg.addHealth(-1/limbs)
+        if(self.LArm.getHealth() > 0 and self.energy == 0):
+            self.LArm.addHealth(-1/limbs)
+        if(self.RArm.getHealth() > 0 and self.energy == 0):
+            self.RArm.addHealth(-1/limbs)
+        if(self.Stomach.getHealth() > 0 and self.energy == 0):
+            self.Stomach.addHealth(-1/limbs)
+        if(self.Thorax.getHealth() > 0 and self.energy == 0):
+            self.Thorax.addHealth(-1/limbs)
+        if(self.Head.getHealth() > 0 and self.energy == 0):
+            self.Head.addHealth(-1/limbs)
+        limbs = 0    
+            
         self.hp = 0   
         self.calculateTotal()
 
@@ -409,6 +449,7 @@ class Character():
     def getHealthData(self):
         return (self.getLeftLeg(), self.getRightLeg(), self.getLeftArm(), self.getRightArm(), self.getStomach(), self.getThorax(), self.getHead())
     
+    #Returns the number of heavy and light bleeds
     def getBleedData(self):
         countl = 0
         counth = 0

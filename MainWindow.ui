@@ -1308,214 +1308,6 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/inj/M.U.L.E..webp&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="MorphineB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>20</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="L1B">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>90</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="TrimadolB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>160</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="AdrenalineB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>230</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="AHF1B">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>510</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="PerfotoraB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>440</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="PropitalB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>300</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="ETGB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>370</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="MULEB">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>230</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="Obdolbos2B">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>160</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="PNBB">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>20</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="ObdolbosB">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>90</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="ZagustinB">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
-        <y>580</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Best</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-     </widget>
      <widget class="QPushButton" name="UMorphine">
       <property name="geometry">
        <rect>
@@ -1686,6 +1478,214 @@
       </property>
       <property name="text">
        <string>Use</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="MorphineB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="L1B">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>90</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="TrimadolB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>160</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="AdrenalineB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>230</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="ObdolbosB">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>90</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="PNBB">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>20</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="Obdolbos2B">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>160</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="MULEB">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>230</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="ETGB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>370</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="PropitalB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>300</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="PerfotoraB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>440</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="AHF1B">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>510</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="ZagustinB">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>580</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Best</string>
+      </property>
+      <property name="tristate">
+       <bool>false</bool>
       </property>
      </widget>
     </widget>
@@ -2179,12 +2179,12 @@
    <zorder>energy</zorder>
    <zorder>HydrationValue</zorder>
    <zorder>EnergyValue</zorder>
-   <zorder>end</zorder>
    <zorder>speed</zorder>
    <zorder>label_6</zorder>
    <zorder>label_2</zorder>
    <zorder>HydrationRate</zorder>
    <zorder>EnergyRate</zorder>
+   <zorder>end</zorder>
   </widget>
  </widget>
  <resources>

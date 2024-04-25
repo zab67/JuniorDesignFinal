@@ -13,6 +13,7 @@ import Injector
 from Injector import *
 
 class Setup(Ui_MainWindow):  # Subclass QMainWindow
+    #Intiliize character and injectors
     def __init__(self):
         super().__init__()
         
@@ -27,19 +28,19 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
 
         self.l1 = Injector()
         self.l1.addPK(120, 0)
-        self.l1.addStrength(20,120,1)
+        self.l1.addStrength(20 * 0.6,120,1)
         self.l1.addEnergyRate(-0.45,60,1)
         self.l1.addHydrationRate(-0.45,60,1)
 
         self.trimadol = Injector()
         self.trimadol.addPK(185, 0)
-        self.trimadol.addStrength(10,180,1)
+        self.trimadol.addStrength(10 * 0.6,180,1)
         self.trimadol.addEnergyRate(-0.5,180,1)
         self.trimadol.addHydrationRate(-0.5,180,1)
 
         self.adrenaline = Injector()
         self.adrenaline.addPK(65, 0)
-        self.adrenaline.addStrength(10,60,1)
+        self.adrenaline.addStrength(10 * 0.6,60,1)
         self.adrenaline.addHealthRate(4,15,1)
         self.adrenaline.addEnergyRate(-0.8,30,50)
         self.adrenaline.addHydrationRate(-1,30,50)
@@ -71,19 +72,19 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.zagustin.addHydrationRate(-1.4,40,170)
 
         self.pNB = Injector()
-        self.pNB.addStrength(20,40,1)
+        self.pNB.addStrength(20 * 0.6,40,1)
         self.pNB.addHealthRate(3,40,1)
         self.pNB.addHealth(-20, 41)
 
         self.obdolbos = Injector(0.25)
-        self.obdolbos.addStrength(10,600,1)
+        self.obdolbos.addStrength(10 * 0.6 + 0.1,600,1)
         self.obdolbos.addHealthRate(1,600,1)
         self.obdolbos.addHydrationRate(-1,600,1)
         self.obdolbos.addEnergyRate(-1,600,1)
         self.obdolbos.addHealthRate(-600,600,1)
 
         self.obdolbos2 = Injector()
-        self.obdolbos2.addStrength((27 + 20),1800,1)
+        self.obdolbos2.addStrength(20 * 0.6 + 27,1800,1)
         self.obdolbos2.addEnergyRate(-1,1800,1)
         self.obdolbos2.addHydrationRate(-1,1800,1)
 
@@ -91,7 +92,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.mULE.addStrength(30,900,1)
         self.mULE.addHealthRate(-0.1,900,1)
         
-        
+    #Connect Ui to functions
     def connectFunctions(self):
         #Light bleed enables
         self.LLLB.clicked.connect(self.Statuses)
@@ -148,7 +149,8 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.speed.valueChanged.connect(self.timers)
         #Time speed calculation
         self.timers()
-
+    
+    #Setup timers for real time setup
     def timers(self):
         #Real time timers to run simulation
         self.SetTimer = QTimer()
@@ -161,8 +163,9 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.MainTimer.start(self.timeStep)
         self.MainTimer.timeout.connect(self.step) # runs Interactions
 
-    #Function to activate stimulant effects
+    #Function to activate stimulant effects and run time effects
     def step(self):
+        #Check if injector is running
         self.PMC.effect(self.morphine.simulate())
         self.PMC.effect(self.l1.simulate())
         self.PMC.effect(self.trimadol.simulate())
@@ -176,13 +179,16 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.PMC.effect(self.obdolbos.simulate())
         self.PMC.effect(self.obdolbos2.simulate())
         self.PMC.effect(self.mULE.simulate())
+        #PMC time effect
         self.PMC.timeStep()
+        #Find best injector
         self.setBest()
 
-    #Function to get values constantly for user interface
+    #Function to get values constantly for user interface and set display
     def run(self):
-        if(self.PMC.getHead() == 0 or self.PMC.getThorax() == 0 or self.PMC.getEnergy() == 0):
+        if(self.PMC.getHead() == 0 or self.PMC.getThorax() == 0):
             self.end.show()
+
         #Gets the PMC health and displays them
         val = self.PMC.getLeftLeg()
         self.LeftLegHealth.setValue(val)
@@ -208,6 +214,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         val = self.PMC.getTotalHealth()
         self.OverallHealth.setValue(val)
         self.OverallHealthValue.setText(str(val) + "/440")
+
         #Gets the PMC statuses and displays them
         val = self.PMC.getWeight()
         buff = self.PMC.getStronger()
@@ -225,7 +232,8 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         val = self.PMC.getHydration()
         self.HydrationValue.setText('<html><head/><body><p><span style=" font-size:14pt; font-weight:700; color:#6ef3ff;">' + str(val) + '/100</span></p><p><br/></p></body></html>')
         (light, heavy, fracture) = self.PMC.getLeftLegStatus()
-        #Gets the rate of decrease
+
+        #Gets the rate of decrease for energy and hydration
         (en, hy) = self.PMC.getRates()
         if(en < 0):
             self.EnergyRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#fffb7d;">\\/ ' + str(abs(en)) + '</span></p></body></html>')
@@ -235,7 +243,8 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
             self.HydrationRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#6ef3ff;">\\/ ' + str(abs(hy)) + '</span></p></body></html>')
         else:
             self.HydrationRate.setText('<html><head/><body><p><span style=" font-weight:700; color:#6ef3ff;">/\\ ' + str(hy) + '</span></p></body></html>')
-        #Gets the limb effects and displays them
+        
+        #Gets the limb bleeds and fractures and displays them
         if(light):
             self.LLL.show()
         else:
@@ -345,21 +354,65 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         else:
             self.HPK.hide()
 
+    #Function to find the best injector at every moment
     def setBest(self):
-        self.morphine.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.l1.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.trimadol.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.adrenaline.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.propital.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.eTG.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.perfotora.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.aHF1.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.zagustin.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.pNB.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.obdolbos.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.obdolbos2.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-        self.mULE.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture())
-    
+        scores = []
+        # runs the score function
+        #Index1 gets limb health values
+        #Index2 gets light and heavy bleed counts
+        #Index3 gets if there is a fracture
+        #Index4 gest if the painkill is applied
+        #Index5 gets current weight
+        #Index6 gets strength buff
+        #Index7 gets energy of PMC
+        #Index8 gets hydration of PMC
+        scores.append(self.morphine.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Morphine: " + str(scores[0]))
+        scores.append(self.l1.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("L1: " + str(scores[1]))
+        scores.append(self.trimadol.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Trimadol: " + str(scores[2]))
+        scores.append(self.adrenaline.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Adrenaline: " + str(scores[3]))
+        scores.append(self.propital.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Propital: " + str(scores[4]))
+        scores.append(self.eTG.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("ETG: " + str(scores[5]))
+        scores.append(self.perfotora.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Perfotoran: " + str(scores[6]))
+        scores.append(self.aHF1.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("AHF1: " + str(scores[7]))
+        scores.append(self.zagustin.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Zafustin: " + str(scores[8]))
+        scores.append(self.pNB.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("PNB: " + str(scores[9]))
+        scores.append(self.obdolbos.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Obdolbos: " + str(scores[10]))
+        scores.append(self.obdolbos2.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("Obdolbos2: " + str(scores[11]))
+        scores.append(self.mULE.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
+        #print("MULE: " + str(scores[12]))
+        #print("")
+        #Gets score list and sets list for best injector
+        bestInjector = [False, False, False, False, False, False, False, False, False, False, False, False, False]
+        for i in range(len(scores)):
+            if scores[i] == max(scores):
+                bestInjector[i] = True
+        #Sets the best injector in user interface
+        self.MorphineB.setChecked(bestInjector[0])
+        self.L1B.setChecked(bestInjector[1])
+        self.TrimadolB.setChecked(bestInjector[2])
+        self.AdrenalineB.setChecked(bestInjector[3])
+        self.PropitalB.setChecked(bestInjector[4])
+        self.ETGB.setChecked(bestInjector[5])
+        self.PerfotoraB.setChecked(bestInjector[6])
+        self.AHF1B.setChecked(bestInjector[7])
+        self.ZagustinB.setChecked(bestInjector[8])
+        self.PNBB.setChecked(bestInjector[9])
+        self.ObdolbosB.setChecked(bestInjector[10])
+        self.Obdolbos2B.setChecked(bestInjector[11])
+        self.MULEB.setChecked(bestInjector[12])  
+
     #Functions for when the user starts an injector
     def MorphineSelect(self):
         self.morphine.start()
@@ -402,7 +455,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
 
         
 
-    #Functions for limb statuses
+    #Functions for limb statuses for user setup
     def Statuses(self):
         self.PMC.setLeftLegStatus(self.LLLB.isChecked(), self.LLHB.isChecked(), self.LLFB.isChecked())
         self.PMC.setRightLegStatus(self.RLLB.isChecked(), self.RLHB.isChecked(), self.RLFB.isChecked())
@@ -412,7 +465,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         self.PMC.setThoraxStatus(self.TLB.isChecked(), self.THB.isChecked())
         self.PMC.setHeadStatus(self.HLB.isChecked(), self.HHB.isChecked())
 
-    #Limb health functions
+    #User set Limb health functions
     def ChangeHealth(self):
         try:
             val = int(self.LLHealth.text())
@@ -459,18 +512,21 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
 
     #Changes value for additonal body details
     def ChangeAdditional(self):
+        #User set weight
         try:
             val = int(self.Weight.text())
-            if(val >= 0 and val < 101):
+            if(val >= 0 and val < 121):
                 self.PMC.setWeight(val) 
         except:
             pass
+        #User set energy
         try:
             val = int(self.Energy.text())
             if(val >= 0 and val < 101):
                 self.PMC.setEnergy(val) 
         except:
             pass
+        #user set hydration
         try:
             val = int(self.Hydration.text())
             if(val >= 0 and val < 101):
@@ -478,7 +534,7 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         except:
             return
         
-
+#When program is started set the images up and hide nessasary images
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
