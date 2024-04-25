@@ -12,4 +12,4 @@ git clone https://github.com/zab67/JuniorDesignFinal
 pip install pyqt6
 ```
 ### To run the system:
-- #### Run MainWindow.py
+- #### Run MainCode.py
