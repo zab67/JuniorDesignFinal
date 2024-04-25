@@ -20,4 +20,4 @@ pip install pyqt6
 - #### The simulated body shows: Bleeds, Fractures, Health, Status effects, and Energy/Hydration/Weight values
 - #### The first user interaction tab you can set all body values such as the previously mentioned: Bleeds, Fractures, Health, Status effects, and Energy/Hydration/Weight values
 - #### The second user interaction tab you can activate any injector you wish to see interact with the body. At every second the program will calculate the best injector for that second and tell you which one that is
-- #### There is also a slider underneth the user interaction where you can set the simulation speed from 1x to 10x spee
+- #### There is also a slider underneth the user interaction where you can set the simulation speed from 1x to 10x speed
