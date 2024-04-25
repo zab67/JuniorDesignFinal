@@ -154,12 +154,12 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
     def timers(self):
         #Real time timers to run simulation
         self.SetTimer = QTimer()
-        self.timeStep = 500/(self.speed.value())
+        self.timeStep = round(500/(self.speed.value()))
         self.SetTimer.start(self.timeStep)
         self.SetTimer.timeout.connect(self.run) # Runs UI
 
         self.MainTimer = QTimer()
-        self.timeStep = 1000/(self.speed.value())
+        self.timeStep = round(1000/(self.speed.value()))
         self.MainTimer.start(self.timeStep)
         self.MainTimer.timeout.connect(self.step) # runs Interactions
 
@@ -393,6 +393,8 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
         scores.append(self.mULE.getScore(self.PMC.getHealthData(), self.PMC.getBleedData(), self.PMC.getIfFracture(), self.PMC.getIfPainKill(), self.PMC.getWeight(), self.PMC.getStronger(), self.PMC.getEnergy(), self.PMC.getHydration()))
         #print("MULE: " + str(scores[12]))
         #print("")
+        #Sets the score label
+        self.scores.setText("Morphine:     "+ str(scores[0]) +"\nL1:                  "+ str(scores[1]) +"\nTrimadol:       "+ str(scores[2]) +"\nAdrenaline:    "+ str(scores[3]) +"\nPropital:         "+ str(scores[4]) +"\nETG:                "+ str(scores[5]) +"\nPerfotoran:    "+ str(scores[6]) +"\nAHF1:             "+ str(scores[7]) +"\nZagustin:       "+ str(scores[8]) +"\nPNB:               "+ str(scores[9]) +"\nObdolbos:     "+ str(scores[10]) +"\nObdolbos2:   "+ str(scores[11]) +"\nMULE:            "+str(scores[12]))
         #Gets score list and sets list for best injector
         bestInjector = [False, False, False, False, False, False, False, False, False, False, False, False, False]
         for i in range(len(scores)):

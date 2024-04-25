@@ -180,6 +180,8 @@ class Injector():
             hold  = (weight - 30)
             if(hold > self.strength):
                 hold = self.strength
+            if(overweight >= self.strength):
+                hold = 0
             score += hold * 80
         
         #Score for energy effects
@@ -218,7 +220,7 @@ class Injector():
             if(self.health + totalHealth> 440):
                 score -= (totalHealth + totalHeal - 440) * 5
         elif(self.health < 0):
-            score += self.health 
+            score += self.health * 5
 
         #Randomization of obdolbos makes it not good
         if(self.odds == 0.25):
