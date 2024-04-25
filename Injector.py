@@ -106,7 +106,7 @@ class Injector():
         self.health = val
         self.health_delay = delay
 
-    #Function to start timer count
+    #Function to start timer count for injector
     def start(self):
         self.begin = True
         self.count = 0
@@ -147,13 +147,83 @@ class Injector():
             if(self.count == self.health_delay):
                 he += self.health
             self.count += 1
+            #Return the effect values for every second
             return (pk,st,nb,en,hy,he)
         else:
+            #If not selected default no effect values
             return (False, 0, False, 0, 0, 0)
-
-    def getScore(self, health, bleeds, fracture):
+    
+    #Find the score of the injector for best calculation
+    def getScore(self, health, bleeds, fracture, painkill, weight, overweight, energy, hydration):
         score = 0
         
+        #Doing math that will be helpful for score calculations
+        totalHealth = health[0] + health[1] + health[2] + health[3] + health[4] + health[5] + health[6]
+        totalHeal = self.healthB * self.healthB_time
+        totalBleed = self.healthDB * self.healthDB_time
+        totalenergy = self.energyB * self.energyB_time + self.energyDB * self.energyDB_time
+        totalhydration = self.hydrationB * self.hydrationB_time + self.hydrationDB * self.hydrationDB_time
+        
+        #Score for painkill effect
+        #If there is a fracture and not under painkill then positive points
+        if(fracture and self.painkill_time > 0 and not painkill):
+            score += 500
+        
+        #Score for bleed reduction effect
+        #If there is no bleed effect the score is higher for every bleed
+        if(self.noBleed_time > 0):
+            score += bleeds[0] * 2100 + bleeds[1] * 2100
+        
+        #Score for strength effect
+        #If the character is overweight score increase for amount of helpful strength
+        if(weight - 30 - overweight > 0):
+            hold  = (weight - 30)
+            if(hold > self.strength):
+                hold = self.strength
+            score += hold * 80
+        
+        #Score for energy effects
+        #If energy is less than 50 the energy score effect is doubled
+        if(energy < 50):
+            score += totalenergy * 2
+        else:
+            score += totalenergy
+        
+        #Score for hydration effects
+        #If hydration is less than 50 the hydration score effect is doubled
+        if(hydration < 50):
+            score += totalhydration * 2
+        else:
+            score += totalhydration
+        
+        #Score for health effects
+        #For health debuff negitive for all low values and increase negitive for death
+        if(self.healthDB_time > 0):
+            score += totalBleed * 5
+            if(totalHealth + totalBleed < 0):
+                score += totalHealth + totalBleed * 10
+
+        #If head and thorax are low then healing is higher score
+        if(totalHeal > 100 and (health[5] < 16 or health[6] < 16)):
+            score += self.healthB * 50
+
+        #If positive health effect give points for only healing possible to body                
+        if(self.healthB_time > 0):
+            score += totalHeal * 10
+            if(totalHeal + totalHealth> 440):
+                score -= (totalHealth + totalHeal - 440) * 10
+
+        #Give positive or negitive points for heal value
+        if(self.health > 0):
+            if(self.health + totalHealth> 440):
+                score -= (totalHealth + totalHeal - 440) * 5
+        elif(self.health < 0):
+            score += self.health 
+
+        #Randomization of obdolbos makes it not good
+        if(self.odds == 0.25):
+            score = -100
+
         return score
 
     

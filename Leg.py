@@ -1,10 +1,12 @@
 class Leg():
+    #Initial values
     def __init__(self):
         self.health = 65
         self.light:bool = False
         self.heavy:bool = False
         self.fracture:bool = False
 
+    #Setter Funtions
     def setHealth(self, val):
         self.health = val
 
@@ -16,18 +18,20 @@ class Leg():
 
     def setFracture(self, val):
         self.fracture = val
-
-    def getHealth(self):
-        return self.health
     
     def setStatus(self, l, h, f):
         self.light = l
         self.heavy = h
         self.fracture = f
 
+    #Getter Functions
+    def getHealth(self):
+        return self.health
+
     def getStatus(self):
         return (self.light, self.heavy, self.fracture)
-    
+
+    #Health modifictation
     def subHealth(self, val):
         self.health = self.health - val
         if(self.health < 0):
