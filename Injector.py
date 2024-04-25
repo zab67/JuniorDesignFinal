@@ -180,6 +180,8 @@ class Injector():
             hold  = (weight - 30)
             if(hold > self.strength):
                 hold = self.strength
+            if(overweight >= self.strength):
+                hold = 0
             score += hold * 80
         
         #Score for energy effects
