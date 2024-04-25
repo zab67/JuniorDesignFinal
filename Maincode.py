@@ -154,12 +154,12 @@ class Setup(Ui_MainWindow):  # Subclass QMainWindow
     def timers(self):
         #Real time timers to run simulation
         self.SetTimer = QTimer()
-        self.timeStep = 500/(self.speed.value())
+        self.timeStep = round(500/(self.speed.value()))
         self.SetTimer.start(self.timeStep)
         self.SetTimer.timeout.connect(self.run) # Runs UI
 
         self.MainTimer = QTimer()
-        self.timeStep = 1000/(self.speed.value())
+        self.timeStep = round(1000/(self.speed.value()))
         self.MainTimer.start(self.timeStep)
         self.MainTimer.timeout.connect(self.step) # runs Interactions
 
